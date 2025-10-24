@@ -62,7 +62,7 @@ GROUP BY continent
 ORDER BY TotalDeathCount DESC
 
 
---GLOBAL NUMBERS
+--------------GLOBAL NUMBERS------------
 
 SELECT SUM(new_cases) AS TotalCases, SUM(cast(new_deaths as decimal(8,2))) AS TotalDeaths,
 		SUM(cast(new_deaths as decimal(10,2)))/SUM(new_cases)*100 AS DeathPercentage
@@ -70,7 +70,7 @@ FROM PortfolioProject..CovidDeaths
 WHERE continent is not null
 ORDER BY 1,2
 
-
+----------------USING JOINS------------------
 --LOOKING AT TOTAL POPULATION VS VACCINATIONS
 
 SELECT CD.continent, CD.location, CD.date, CD.population, CV.new_vaccinations
@@ -85,7 +85,7 @@ ORDER BY 2,3
 
 
 
---USE CTE
+-----------------USE CTE----------------
 
 WITH POPVSVAC (continent, location, date, population, new_vaccinations, RollingpeopleVaccination)
 AS
@@ -105,7 +105,7 @@ FROM POPVSVAC
 
 
 
---TEMP TABLE
+-------------TEMP TABLE----------------
 
 DROP TABLE IF EXISTS #PercentPopulationVaccinated
 CREATE TABLE #PercentPopulationVaccinated
@@ -152,4 +152,5 @@ WHERE CD.continent IS NOT NULL
 --ORDER BY 2,3
 
 SELECT *
+
 FROM PercentPopulationVaccinated
